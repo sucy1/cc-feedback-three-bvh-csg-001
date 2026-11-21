@@ -87,12 +87,17 @@ export function getMaterialList( groups, materials ) {
 	let result = materials;
 	if ( ! Array.isArray( materials ) ) {
 
-		result = [];
+		// find the highest referenced material slot so the resulting
+		// list is dense - sparse slots would otherwise surface as
+		// undefined materials in the CSG result
+		let maxIndex = 0;
 		groups.forEach( g => {
 
-			result[ g.materialIndex ] = materials;
+			maxIndex = Math.max( maxIndex, g.materialIndex );
 
 		} );
+
+		result = new Array( maxIndex + 1 ).fill( materials );
 
 	}
 

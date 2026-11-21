@@ -165,3 +165,20 @@ export class HalfEdgeHelper extends EdgesHelper {
 }
 
 export function computeMeshVolume( mesh : Mesh | BufferGeometry ) : number;
+
+export interface CSGValidationIssue {
+
+	code: string;
+	path: string;
+	message: string;
+
+}
+
+export interface CSGValidationResult {
+
+	ok: boolean;
+	issues: CSGValidationIssue[];
+
+}
+
+export function validateCSGResult( brush: Brush ) : CSGValidationResult;
